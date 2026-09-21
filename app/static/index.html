@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ProdAI - AI Productivity Assistant</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+
+            <div>
+                <h2>ProdAI</h2>
+                <span>AI Productivity</span>
+            </div>
+        </div>
+
+
+        <div class="menu-title">
+            WORKSPACE
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <button class="menu-item active"
+                    onclick="showSection('dashboard', this)">
+
+                <span class="menu-icon">⌂</span>
+
+                <span>Dashboard</span>
+
+            </button>
+
+
+            <button class="menu-item"
+                    onclick="showSection('ai-agent', this)">
+
+                <span class="menu-icon">✦</span>
+
+                <span>AI Agent</span>
+
+                <span class="live-dot"></span>
+
+            </button>
+
+
+            <button class="menu-item"
+                    onclick="showSection('analytics', this)">
+
+                <span class="menu-icon">◫</span>
+
+                <span>Analytics</span>
+
+            </button>
+
+
+            <button class="menu-item"
+                    onclick="showSection('tasks', this)">
+
+                <span class="menu-icon">✓</span>
+
+                <span>Tasks</span>
+
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-divider"></div>
+
+
+        <!-- AI STATUS -->
+
+        <div class="ai-status-card">
+
+            <div class="ai-status-top">
+
+                <div class="ai-orb">
+                    ✦
+                </div>
+
+                <div>
+
+                    <strong>AI Assistant</strong>
+
+                    <span>
+                        Online
+                    </span>
+
+                </div>
+
+                <div class="online-dot"></div>
+
+            </div>
+
+
+            <p>
+                Your productivity agent is ready to analyze your day.
+            </p>
+
+
+            <button onclick="runAgent()">
+                Analyze my day →
+            </button>
+
+        </div>
+
+
+        <!-- USER -->
+
+        <div class="user-profile">
+
+            <div class="avatar">
+                M
+            </div>
+
+            <div class="user-details">
+
+                <strong>Mahima</strong>
+
+                <span>Personal Workspace</span>
+
+            </div>
+
+            <button class="more-btn">
+                ⋮
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- TOP NAVBAR -->
+
+        <header class="topbar">
+
+            <div class="mobile-brand">
+                ✦ ProdAI
+            </div>
+
+
+            <div class="page-info">
+
+                <span id="page-label">
+                    Overview
+                </span>
+
+                <h1 id="page-title">
+                    Good morning, Mahima 👋
+                </h1>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <div class="date-box">
+
+                    <span>Today</span>
+
+                    <strong id="current-date">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <button class="icon-btn">
+                    🔔
+                    <span class="notification-dot"></span>
+                </button>
+
+
+                <div class="top-avatar">
+                    M
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================================================= -->
+        <!-- DASHBOARD -->
+        <!-- ================================================= -->
+
+        <section id="dashboard"
+                 class="section active-section">
+
+
+            <!-- HERO -->
+
+            <div class="hero-card">
+
+                <div class="hero-content">
+
+                    <span class="hero-tag">
+                        ✦ AI PRODUCTIVITY
+                    </span>
+
+                    <h2>
+                        Make your day
+                        <span>more productive.</span>
+                    </h2>
+
+                    <p>
+                        Your AI assistant analyzes your tasks,
+                        focus time and daily activity to help
+                        you work smarter.
+                    </p>
+
+
+                    <button class="hero-btn"
+                            onclick="runAgent()">
+
+                        Analyze My Productivity
+
+                        <span>→</span>
+
+                    </button>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="orb-large">
+                        ✦
+                    </div>
+
+                    <div class="floating-card card-one">
+
+                        <span>Productivity</span>
+
+                        <strong id="hero-score">
+                            0%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="floating-card card-two">
+
+                        <span>Focus time</span>
+
+                        <strong>
+                            <span id="hero-focus">0</span> min
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-icon purple">
+                        ✦
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>
+                            Productivity Score
+                        </span>
+
+                        <strong id="productivity-score">
+                            0%
+                        </strong>
+
+                        <small>
+                            AI calculated
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>
+                            Completed Tasks
+                        </span>
+
+                        <strong id="completed-count">
+                            0
+                        </strong>
+
+                        <small>
+                            Today's progress
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon blue">
+                        ◷
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>
+                            Focus Time
+                        </span>
+
+                        <strong>
+                            <span id="focus-time">
+                                0
+                            </span>
+                            <small class="unit">
+                                min
+                            </small>
+                        </strong>
+
+                        <small>
+                            Deep work
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon orange">
+                        ⚡
+                    </div>
+
+                    <div class="stat-info">
+
+                        <span>
+                            AI Status
+                        </span>
+
+                        <strong class="status-active">
+                            Active
+                        </strong>
+
+                        <small>
+                            Agent monitoring
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTENT GRID -->
+
+            <div class="content-grid">
+
+
+                <!-- TASKS -->
+
+                <div class="card tasks-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                TASK MANAGEMENT
+                            </span>
+
+                            <h2>
+                                Today's Tasks
+                            </h2>
+
+                        </div>
+
+
+                        <button class="add-btn"
+                                onclick="openTaskModal()">
+
+                            + Add Task
+
+                        </button>
+
+                    </div>
+
+
+                    <div id="task-list"
+                         class="task-list">
+
+                        <div class="empty">
+
+                            <div class="empty-icon">
+                                ✓
+                            </div>
+
+                            <h3>
+                                No tasks yet
+                            </h3>
+
+                            <p>
+                                Add your first task and let AI
+                                organize your day.
+                            </p>
+
+                            <button
+                                onclick="openTaskModal()">
+
+                                Create Task
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AI INSIGHTS -->
+
+                <div class="card insights-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                INTELLIGENT ANALYSIS
+                            </span>
+
+                            <h2>
+                                AI Insights
+                            </h2>
+
+                        </div>
+
+
+                        <div class="ai-badge">
+                            <span></span>
+                            AI
+                        </div>
+
+                    </div>
+
+
+                    <div id="agent-insights"
+                         class="insights">
+
+                        <div class="empty insight-empty">
+
+                            <div class="ai-empty-icon">
+                                ✦
+                            </div>
+
+                            <h3>
+                                Ready to analyze
+                            </h3>
+
+                            <p>
+                                Run the AI agent to receive
+                                personalized productivity insights.
+                            </p>
+
+                            <button onclick="runAgent()">
+                                Run AI Analysis
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOWER GRID -->
+
+            <div class="content-grid lower">
+
+
+                <!-- SMART SCHEDULE -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                AI PLANNING
+                            </span>
+
+                            <h2>
+                                Smart Schedule
+                            </h2>
+
+                        </div>
+
+                        <span class="agent-label">
+                            Planning Agent
+                        </span>
+
+                    </div>
+
+
+                    <div id="schedule-list">
+
+                        <div class="empty small-empty">
+
+                            <p>
+                                Your AI-generated schedule
+                                will appear here.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECOMMENDATIONS -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                PERSONALIZED
+                            </span>
+
+                            <h2>
+                                Recommendations
+                            </h2>
+
+                        </div>
+
+                        <span class="agent-label">
+                            AI Agent
+                        </span>
+
+                    </div>
+
+
+                    <div id="recommendation-list">
+
+                        <div class="empty small-empty">
+
+                            <p>
+                                Recommendations will appear
+                                after AI analysis.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- AI AGENT -->
+        <!-- ================================================= -->
+
+        <section id="ai-agent"
+                 class="section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="section-label">
+                        ARTIFICIAL INTELLIGENCE
+                    </span>
+
+                    <h2>
+                        AI Agent Center
+                    </h2>
+
+                    <p>
+                        Your productivity system works through
+                        multiple specialized agents.
+                    </p>
+
+                </div>
+
+
+                <button class="primary-btn"
+                        onclick="runAgent()">
+
+                    ✦ Run AI Agents
+
+                </button>
+
+            </div>
+
+
+            <div class="agent-grid">
+
+
+                <div class="agent-box">
+
+                    <div class="agent-icon red">
+                        ✓
+                    </div>
+
+                    <h3>
+                        Task Agent
+                    </h3>
+
+                    <p>
+                        Manages tasks and priorities.
+                    </p>
+
+                    <span class="ready">
+                        ● Ready
+                    </span>
+
+                </div>
+
+
+                <div class="agent-box">
+
+                    <div class="agent-icon blue">
+                        ◫
+                    </div>
+
+                    <h3>
+                        Analysis Agent
+                    </h3>
+
+                    <p>
+                        Analyzes productivity performance.
+                    </p>
+
+                    <span class="ready">
+                        ● Ready
+                    </span>
+
+                </div>
+
+
+                <div class="agent-box">
+
+                    <div class="agent-icon green">
+                        ◷
+                    </div>
+
+                    <h3>
+                        Planning Agent
+                    </h3>
+
+                    <p>
+                        Creates intelligent schedules.
+                    </p>
+
+                    <span class="ready">
+                        ● Ready
+                    </span>
+
+                </div>
+
+
+                <div class="agent-box">
+
+                    <div class="agent-icon orange">
+                        ✦
+                    </div>
+
+                    <h3>
+                        Recommendation Agent
+                    </h3>
+
+                    <p>
+                        Generates personalized suggestions.
+                    </p>
+
+                    <span class="ready">
+                        ● Ready
+                    </span>
+
+                </div>
+
+
+                <div class="agent-box">
+
+                    <div class="agent-icon purple">
+                        ♡
+                    </div>
+
+                    <h3>
+                        Feedback Agent
+                    </h3>
+
+                    <p>
+                        Collects feedback from the user.
+                    </p>
+
+                    <span class="ready">
+                        ● Ready
+                    </span>
+
+                </div>
+
+
+                <div class="agent-box orchestrator">
+
+                    <div class="agent-icon cyan">
+                        ⚡
+                    </div>
+
+                    <h3>
+                        Agent Orchestrator
+                    </h3>
+
+                    <p>
+                        Coordinates the complete AI workflow.
+                    </p>
+
+                    <span class="running">
+                        ● Running
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- WORKFLOW -->
+
+            <div class="card workflow">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            SYSTEM WORKFLOW
+                        </span>
+
+                        <h2>
+                            Agentic AI Architecture
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="workflow-line">
+
+                    <div class="workflow-node">
+                        <span>👤</span>
+                        <strong>User</strong>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                    <div class="workflow-node">
+                        <span>🌐</span>
+                        <strong>Web App</strong>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                    <div class="workflow-node highlighted">
+                        <span>⚡</span>
+                        <strong>Orchestrator</strong>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                    <div class="workflow-node">
+                        <span>🤖</span>
+                        <strong>AI Agents</strong>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                    <div class="workflow-node">
+                        <span>📊</span>
+                        <strong>Insights</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- ANALYTICS -->
+        <!-- ================================================= -->
+
+        <section id="analytics"
+                 class="section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="section-label">
+                        PERFORMANCE
+                    </span>
+
+                    <h2>
+                        Productivity Analytics
+                    </h2>
+
+                    <p>
+                        Track your productivity patterns over time.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-grid">
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                WEEKLY PERFORMANCE
+                            </span>
+
+                            <h2>
+                                Productivity Overview
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="bars">
+
+                        <div class="bar-item">
+                            <div class="bar"
+                                 style="height:45%">
+                            </div>
+                            <span>Mon</span>
+                        </div>
+
+                        <div class="bar-item">
+                            <div class="bar"
+                                 style="height:70%">
+                            </div>
+                            <span>Tue</span>
+                        </div>
+
+                        <div class="bar-item">
+                            <div class="bar"
+                                 style="height:55%">
+                            </div>
+                            <span>Wed</span>
+                        </div>
+
+                        <div class="bar-item">
+                            <div class="bar"
+                                 style="height:85%">
+                            </div>
+                            <span>Thu</span>
+                        </div>
+
+                        <div class="bar-item">
+                            <div class="bar"
+                                 style="height:65%">
+                            </div>
+                            <span>Fri</span>
+                        </div>
+
+                        <div class="bar-item">
+                            <div class="bar"
+                                 style="height:90%">
+                            </div>
+                            <span>Sat</span>
+                        </div>
+
+                        <div class="bar-item">
+                            <div class="bar"
+                                 style="height:75%">
+                            </div>
+                            <span>Sun</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card factors">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                SCORE BREAKDOWN
+                            </span>
+
+                            <h2>
+                                Productivity Factors
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="factor">
+
+                        <div>
+                            <span>Task Completion</span>
+                            <strong>35%</strong>
+                        </div>
+
+                        <div class="factor-bar">
+                            <span style="width:35%"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="factor">
+
+                        <div>
+                            <span>Focus Time</span>
+                            <strong>30%</strong>
+                        </div>
+
+                        <div class="factor-bar">
+                            <span style="width:30%"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="factor">
+
+                        <div>
+                            <span>Distraction Control</span>
+                            <strong>15%</strong>
+                        </div>
+
+                        <div class="factor-bar">
+                            <span style="width:15%"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="factor">
+
+                        <div>
+                            <span>Sleep</span>
+                            <strong>10%</strong>
+                        </div>
+
+                        <div class="factor-bar">
+                            <span style="width:10%"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="factor">
+
+                        <div>
+                            <span>Energy Level</span>
+                            <strong>10%</strong>
+                        </div>
+
+                        <div class="factor-bar">
+                            <span style="width:10%"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- TASKS -->
+        <!-- ================================================= -->
+
+        <section id="tasks"
+                 class="section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <span class="section-label">
+                        ORGANIZE
+                    </span>
+
+                    <h2>
+                        My Tasks
+                    </h2>
+
+                    <p>
+                        Manage everything you need to accomplish.
+                    </p>
+
+                </div>
+
+
+                <button class="primary-btn"
+                        onclick="openTaskModal()">
+
+                    + Add Task
+
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <div id="all-task-list"
+                     class="task-list">
+
+                    <div class="empty">
+
+                        <h3>
+                            No tasks available
+                        </h3>
+
+                        <p>
+                            Create your first task.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- ADD TASK MODAL -->
+<!-- ================================================= -->
+
+<div id="task-modal"
+     class="modal">
+
+    <div class="modal-box">
+
+        <button class="modal-close"
+                onclick="closeTaskModal()">
+            ×
+        </button>
+
+        <div class="modal-title">
+
+            <div class="modal-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <h2>
+                    Create New Task
+                </h2>
+
+                <p>
+                    Add a task for your AI assistant.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="task-form">
+
+            <label>
+                Task Title
+            </label>
+
+            <input
+                type="text"
+                id="task-title"
+                placeholder="e.g. Complete DBMS assignment"
+                required>
+
+
+            <label>
+                Description
+            </label>
+
+            <textarea
+                id="task-description"
+                placeholder="What needs to be done?"></textarea>
+
+
+            <div class="form-row">
+
+                <div>
+
+                    <label>
+                        Priority
+                    </label>
+
+                    <select id="task-priority">
+
+                        <option value="low">
+                            Low
+                        </option>
+
+                        <option value="medium"
+                                selected>
+                            Medium
+                        </option>
+
+                        <option value="high">
+                            High
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Estimated Time
+                    </label>
+
+                    <input
+                        type="number"
+                        id="task-minutes"
+                        value="30"
+                        min="5">
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="cancel-btn"
+                        onclick="closeTaskModal()">
+
+                    Cancel
+
+                </button>
+
+                <button type="submit"
+                        class="primary-btn">
+
+                    Create Task
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div id="toast"
+     class="toast">
+
+    <span id="toast-message">
+        Done
+    </span>
+
+</div>
+
+
+<script src="/static/app.js"></script>
+
+</body>
+
+</html>
