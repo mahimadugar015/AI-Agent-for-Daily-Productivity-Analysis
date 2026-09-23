@@ -5,3 +5,9 @@
 venv/
 __pycache__/
 *.pyc
+
+# Database
+productivity.db
+
+# Test/cache
+.pytest_cache/
